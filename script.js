@@ -1,6 +1,16 @@
-let selectedIndustry = 'IT'; // Only IT is active
-let selectedLevel = null;
+let selectedIndustry = null; // Branża wybrana przez użytkownika
+let selectedLevel = null; // Poziom szczegółowości wybrany przez użytkownika
 
+// Obsługa przycisków branży
+document.querySelectorAll('.industry-btn').forEach(button => {
+    button.addEventListener('click', function() {
+        selectedIndustry = this.getAttribute('data-industry');
+        clearActiveButtons('industry-btn');
+        this.classList.add('active');
+    });
+});
+
+// Obsługa przycisków poziomu szczegółowości
 document.querySelectorAll('.level-btn').forEach(button => {
     button.addEventListener('click', function() {
         selectedLevel = this.getAttribute('data-level');
@@ -9,23 +19,32 @@ document.querySelectorAll('.level-btn').forEach(button => {
     });
 });
 
+// Funkcja czyszcząca aktywne przyciski
 function clearActiveButtons(buttonClass) {
     document.querySelectorAll(`.${buttonClass}`).forEach(btn => btn.classList.remove('active'));
 }
 
+// Generowanie checklisty
 document.getElementById('generate-checklist').addEventListener('click', generateChecklist);
 
 function generateChecklist() {
-    if (!selectedLevel) {
-        alert("Proszę wybrać poziom szczegółowości.");
+    if (!selectedIndustry || !selectedLevel) {
+        alert("Proszę wybrać branżę i poziom szczegółowości.");
         return;
+    }
+
+    let checklistItems;
+    
+    // Wybór danych na podstawie branży
+    if (selectedIndustry === 'IT') {
+        checklistItems = checklistData.IT[selectedLevel];
+    } else if (selectedIndustry === 'Finanse') {
+        checklistItems = checklistDataFinanse.Finanse[selectedLevel];
     }
 
     const checklistContainer = document.getElementById('checklist-container');
     checklistContainer.innerHTML = ''; // Wyczyść poprzednią checklistę
 
-    const checklistItems = checklistData[selectedIndustry][selectedLevel];
-    
     checklistItems.forEach(item => {
         const checklistItem = document.createElement('div');
         checklistItem.classList.add('checklist-item');
@@ -48,11 +67,11 @@ function generateChecklist() {
     document.getElementById('checklist-section').classList.remove('hidden');
 }
 
-// Funkcja do generowania PDF
+// Pobieranie checklisty jako PDF (funkcjonalność w przyszłości)
 document.getElementById('download-checklist').addEventListener('click', function() {
     const checklistSection = document.getElementById('checklist-section');
     
-    // Użyj html2pdf do wygenerowania PDF z checklisty
+    // Użycie html2pdf do wygenerowania PDF z checklisty
     const opt = {
         margin:       0.5,
         filename:     'checklista_opsec.pdf',

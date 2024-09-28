@@ -16,10 +16,8 @@
     <section id="form-section">
         <h2>Wybierz Branżę</h2>
         <div id="industry-buttons">
-            <button class="industry-btn active" data-industry="IT">IT</button>
-            <button class="industry-btn inactive" disabled>Finanse (wkrótce)</button>
-            <button class="industry-btn inactive" disabled>Prawo (wkrótce)</button>
-            <button class="industry-btn inactive" disabled>Marketing (wkrótce)</button>
+            <button class="industry-btn" data-industry="IT">IT</button>
+            <button class="industry-btn" data-industry="Finanse">Finanse</button>
         </div>
 
         <h2>Poziom szczegółowości</h2>
@@ -32,21 +30,19 @@
     </section>
 
     <section id="checklist-section" class="hidden">
-        <h2>Twoja spersonalizowana  <a href="https://cyberkurs.online/checklist-OPSEC/" target="_blank">checklista OPSEC</a></h2>
+        <h2>Twoja spersonalizowana checklista OPSEC</h2>
         <div id="checklist-container">
             <!-- Checklista generowana dynamicznie -->
         </div>
         <button id="download-checklist">Pobierz jako PDF</button>
     </section>
 
-    <footer>
-        <p>cyberkurs.online – <a href="https://www.linkedin.com/in/artur-markiewicz/" target="_blank">Artur Markiewicz</a> – konsultant, trener – cyberbezpieczeństwo</p>
-    </footer>
-
-    <script src="data.js"></script>
+    <!-- Skrypty -->
+    <script src="data-it.js"></script> <!-- Plik z danymi dla IT -->
+    <script src="data-finanse.js"></script> <!-- Plik z danymi dla Finanse -->
     <script src="script.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+  //  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+    <script src="js/html2pdf.bundle.min.js"></script>
 
 
 </body>
