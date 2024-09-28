@@ -3,21 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OPSEC Generator Checklisty</title>
+    <title>Bezpieczna lista w internecie</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <img src="assets/logo.png" alt="Cyberkurs Online" class="logo">
-        <h1>OPSEC Generator Checklisty</h1>
-        <p>Spersonalizowana checklista najważniejszych zasad OPSEC dla wybranego działu.</p>
+        <h1>Bezpieczna lista w internecie</h1>
+        <p>Spersonalizowana lista najważniejszych zasad w internecie.</p>
     </header>
 
     <section id="form-section">
-        <h2>Wybierz Branżę</h2>
-        <div id="industry-buttons">
-            <button class="industry-btn" data-industry="IT">IT</button>
-            <button class="industry-btn" data-industry="Finanse">Finanse</button>
+        <h2>Wybierz obszar</h2>
+        <div id="area-buttons">
+            <!-- Trzy aktywne przyciski -->
+            <button class="area-btn active" data-area="Zarządzanie hasłami">Zarządzanie hasłami</button>
+            <button class="area-btn active" data-area="Ochrona przed phishingiem">Poczta elektroniczna</button>
+             
+            <!-- Wyszarzone, nieaktywne przyciski -->
+            <button class="area-btn inactive" disabled>Media społecznościowe</button>
+            <button class="area-btn inactive" disabled>Prywatności w sieci</button>
+            <p></p>
+            <button class="area-btn inactive" disabled>Konta w sieci</button>
+            <button class="area-btn inactive" disabled>Zakupy online i transakcje finansowe</button>
+            <button class="area-btn inactive" disabled>Cyberhigiena</button>
         </div>
 
         <h2>Poziom szczegółowości</h2>
@@ -25,21 +34,22 @@
             <button class="level-btn" data-level="podstawowy">Podstawowy</button>
             <button class="level-btn" data-level="rozszerzony">Rozszerzony</button>
         </div>
+        
 
-        <button type="button" id="generate-checklist">Generuj Checklistę</button>
+
+        <button type="button" id="generate-checklist">Generuj Listę</button>
     </section>
 
     <section id="checklist-section" class="hidden">
-        <h2>Twoja spersonalizowana checklista OPSEC</h2>
+        <h2>Twoja spersonalizowana lista zasad bezpieczeństwa</h2>
         <div id="checklist-container">
             <!-- Checklista generowana dynamicznie -->
         </div>
-        <button id="download-checklist">Pobierz jako PDF</button>
+
+
     </section>
 
-    <!-- Stopka -->
     <footer>
-    
         <p>
             cyberkurs.online – <a href="https://www.linkedin.com/in/artur-markiewicz/" target="_blank">
                 Artur Markiewicz </a> – konsultant, trener – cyberbezpieczeństwo <a href="https://github.com/arthc991199/checklist-OPSEC/" target="_blank"> public Git
@@ -47,10 +57,21 @@
         </p>
     </footer>
 
-    <!-- Skrypty -->
-    <script src="data-it.js"></script> <!-- Plik z danymi dla IT -->
-    <script src="data-finanse.js"></script> <!-- Plik z danymi dla Finanse -->
-    <script src="js/html2pdf.bundle.min.js"></script> <!-- html2pdf.js lokalnie -->
-    <script src="script.js"></script>
+ 
+    <!-- Pliki z radami -->
+    <script src="data-password-management.js"></script> <!-- Zarządzanie hasłami -->
+    <script src="data-phishing-protection.js"></script> <!-- Ochrona przed phishingiem -->
+    <script src="data-public-network-security.js"></script> <!-- Bezpieczne korzystanie z sieci publicznych -->
+
+    <!-- Przyszłe pliki z radami -->
+    <!-- <script src="data-social-media-security.js"></script> -->
+    <!-- <script src="data-online-privacy.js"></script> -->
+    <!-- <script src="data-account-management.js"></script> -->
+    <!-- <script src="data-online-shopping-security.js"></script> -->
+    <!-- <script src="data-cyberhygiene.js"></script> -->
+
+    <script src="script.js"></script> <!-- Logika generowania checklisty -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
 </body>
 </html>

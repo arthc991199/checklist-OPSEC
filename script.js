@@ -1,50 +1,81 @@
-let selectedIndustry = null; // Branża wybrana przez użytkownika
-let selectedLevel = null; // Poziom szczegółowości wybrany przez użytkownika
+// Zmienna do przechowywania wybranego poziomu szczegółowości
+let selectedLevel = null;
+// Zmienna do przechowywania wybranego obszaru
+let selectedArea = null;
 
-// Obsługa przycisków branży
-document.querySelectorAll('.industry-btn').forEach(button => {
-    button.addEventListener('click', function() {
-        selectedIndustry = this.getAttribute('data-industry');
-        clearActiveButtons('industry-btn');
-        this.classList.add('active');
-    });
-});
-
-// Obsługa przycisków poziomu szczegółowości
+// Obsługa kliknięć na przyciskach poziomu szczegółowości
 document.querySelectorAll('.level-btn').forEach(button => {
     button.addEventListener('click', function() {
         selectedLevel = this.getAttribute('data-level');
+
+        // Debug: logowanie do konsoli, aby sprawdzić, czy kliknięcie jest rejestrowane
+        console.log(`Wybrany poziom: ${selectedLevel}`);
+
         clearActiveButtons('level-btn');
         this.classList.add('active');
+
+        // Debug: sprawdzenie, czy aktywny przycisk ma odpowiednią klasę
+        console.log(`${this.innerText} przycisk został aktywowany`);
     });
 });
 
-// Funkcja czyszcząca aktywne przyciski
+// Obsługa kliknięć na przyciskach wyboru obszaru
+document.querySelectorAll('.area-btn').forEach(button => {
+    button.addEventListener('click', function() {
+        selectedArea = this.getAttribute('data-area');
+
+        // Debug: logowanie do konsoli, aby sprawdzić, czy kliknięcie jest rejestrowane
+        console.log(`Wybrany obszar: ${selectedArea}`);
+
+        clearActiveButtons('area-btn');
+        this.classList.add('active');
+
+        // Debug: sprawdzenie, czy aktywny przycisk ma odpowiednią klasę
+        console.log(`${this.innerText} przycisk został aktywowany`);
+    });
+});
+
+// Funkcja do usuwania aktywnej klasy ze wszystkich przycisków
 function clearActiveButtons(buttonClass) {
-    document.querySelectorAll(`.${buttonClass}`).forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll(`.${buttonClass}`).forEach(btn => {
+        btn.classList.remove('active');
+        // Debug: logowanie, aby sprawdzić, czy klasy zostały usunięte
+        console.log(`Usunięto aktywną klasę z: ${btn.innerText}`);
+    });
 }
 
-// Generowanie checklisty
-document.getElementById('generate-checklist').addEventListener('click', generateChecklist);
-
-function generateChecklist() {
-    if (!selectedIndustry || !selectedLevel) {
-        alert("Proszę wybrać branżę i poziom szczegółowości.");
-        return;
+// Generowanie checklisty po kliknięciu przycisku "Generuj Checklistę"
+document.getElementById('generate-checklist').addEventListener('click', function() {
+    if (!selectedArea || !selectedLevel) {
+        alert("Proszę wybrać obszar i poziom szczegółowości.");
+        // Debug: komunikat do konsoli, jeśli obszar lub poziom nie został wybrany
+        console.log("Brak wybranego obszaru lub poziomu szczegółowości");
+    } else {
+        console.log(`Generowanie checklisty dla obszaru: ${selectedArea}, poziom: ${selectedLevel}`);
+        generateChecklist(selectedArea, selectedLevel);
     }
+});
 
+// Funkcja do generowania checklisty
+function generateChecklist(area, level) {
     let checklistItems;
-    
-    // Wybór danych na podstawie branży
-    if (selectedIndustry === 'IT') {
-        checklistItems = checklistData.IT[selectedLevel];
-    } else if (selectedIndustry === 'Finanse') {
-        checklistItems = checklistDataFinanse.Finanse[selectedLevel];
+
+    // Pobranie odpowiednich danych w zależności od wybranego obszaru
+    if (area === 'Zarządzanie hasłami') {
+        checklistItems = checklistDataPasswordManagement["Zarządzanie hasłami"][level];
+    } else if (area === 'Ochrona przed phishingiem') {
+        checklistItems = checklistDataPhishingProtection["Ochrona przed phishingiem"][level];
+    } else if (area === 'Bezpieczne korzystanie z sieci publicznych') {
+        checklistItems = checklistDataPublicNetworkSecurity["Bezpieczne korzystanie z sieci publicznych"][level];
+    } else {
+        checklistItems = [];
+        console.log("Nieznany obszar: " + area);
     }
 
     const checklistContainer = document.getElementById('checklist-container');
     checklistContainer.innerHTML = ''; // Wyczyść poprzednią checklistę
 
+    // Dodanie pozycji checklisty do HTML
     checklistItems.forEach(item => {
         const checklistItem = document.createElement('div');
         checklistItem.classList.add('checklist-item');
@@ -54,12 +85,8 @@ function generateChecklist() {
         checklistItem.appendChild(title);
 
         const description = document.createElement('p');
-        description.innerHTML = `${item.description}\n\nWięcej: ${item.moreInfo}`;
+        description.innerText = item.description;
         checklistItem.appendChild(description);
-
-        title.addEventListener('click', () => {
-            description.style.display = description.style.display === 'block' ? 'none' : 'block';
-        });
 
         checklistContainer.appendChild(checklistItem);
     });
@@ -67,18 +94,23 @@ function generateChecklist() {
     document.getElementById('checklist-section').classList.remove('hidden');
 }
 
-// Pobieranie checklisty jako PDF (funkcjonalność w przyszłości)
+// Funkcja do generowania PDF
+// Funkcja do generowania PDF
 document.getElementById('download-checklist').addEventListener('click', function() {
-    const checklistSection = document.getElementById('checklist-section');
-    
-    // Użycie html2pdf do wygenerowania PDF z checklisty
-    const opt = {
-        margin:       0.5,
-        filename:     'checklista_opsec.pdf',
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2 },
-        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-    };
+    const element = document.getElementById('checklist-section');
 
-    html2pdf().set(opt).from(checklistSection).save();
+    // Użycie domyślnej konfiguracji html2pdf, aby zachować dokładny widok strony
+    html2pdf().from(element).save();
 });
+
+document.getElementById('download-txt').addEventListener('click', function() {
+    const checklistContent = document.getElementById('checklist-container').innerText;
+    const blob = new Blob([checklistContent], { type: 'text/plain' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'checklista.txt';
+    link.click();
+});
+
+// Debug: logowanie, że plik script.js został załadowany poprawnie
+console.log("Plik script.js załadowany poprawnie");
