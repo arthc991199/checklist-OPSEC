@@ -1,0 +1,144 @@
+/* Reset stylów */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 90%; /* Zmieniono szerokość na 90% */
+    margin: auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.logo {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    height: 80px;
+}
+
+h1 {
+    color: #2c3e50;
+    font-size: 2.5rem;
+}
+
+h2 {
+    color: #2980b9;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    text-align: left; /* Justowanie tekstu do lewej */
+}
+
+a {
+    color: #2980b9;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+#industry-buttons, #level-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button.active {
+    background-color: #2980b9;
+    color: white;
+}
+
+button.inactive {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
+
+button:hover {
+    background-color: #3498db;
+}
+
+.hidden {
+    display: none;
+}
+
+#checklist-section {
+    padding: 20px;
+    background-color: white;
+    border: 1px solid #ccc;
+    margin-top: 20px;
+}
+
+#checklist-container {
+    margin-top: 20px;
+    text-align: left; /* Justowanie do lewej dla całej sekcji */
+}
+
+.checklist-item {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #f0f4f8;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 3%; /* Przerwa 3% między tytułem a rozwinięciem */
+    text-align: left; /* Justowanie tekstu do lewej */
+}
+
+.checklist-item h3 {
+    flex: 0 0 30%; /* Tytuł zajmuje 30% szerokości */
+    margin: 0;
+}
+
+.checklist-item p {
+    flex: 0 0 67%; /* Rozwinięta rada zajmuje 67% szerokości */
+    margin: 0;
+}
+
+footer {
+    text-align: center;
+    margin-top: auto;
+    font-size: 0.9rem;
+    color: #777;
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    header {
+        padding: 0 20px;
+    }
+}

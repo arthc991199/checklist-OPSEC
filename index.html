@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPSEC Generator Checklisty</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <img src="assets/logo.png" alt="Cyberkurs Online" class="logo">
+        <h1>OPSEC Generator Checklisty</h1>
+        <p>Spersonalizowana checklista najważniejszych zasad OPSEC dla wybranego działu.</p>
+    </header>
+
+    <section id="form-section">
+        <h2>Wybierz Branżę</h2>
+        <div id="industry-buttons">
+            <button class="industry-btn active" data-industry="IT">IT</button>
+            <button class="industry-btn inactive" disabled>Finanse (wkrótce)</button>
+            <button class="industry-btn inactive" disabled>Prawo (wkrótce)</button>
+            <button class="industry-btn inactive" disabled>Marketing (wkrótce)</button>
+        </div>
+
+        <h2>Poziom szczegółowości</h2>
+        <div id="level-buttons">
+            <button class="level-btn" data-level="podstawowy">Podstawowy</button>
+            <button class="level-btn" data-level="rozszerzony">Rozszerzony</button>
+        </div>
+
+        <button type="button" id="generate-checklist">Generuj Checklistę</button>
+    </section>
+
+    <section id="checklist-section" class="hidden">
+        <h2>Twoja spersonalizowana  <a href="https://cyberkurs.online/checklist-OPSEC/" target="_blank">checklista OPSEC</a></h2>
+        <div id="checklist-container">
+            <!-- Checklista generowana dynamicznie -->
+        </div>
+        <button id="download-checklist">Pobierz jako PDF</button>
+    </section>
+
+    <footer>
+        <p>cyberkurs.online – <a href="https://www.linkedin.com/in/artur-markiewicz/" target="_blank">Artur Markiewicz</a> – konsultant, trener – cyberbezpieczeństwo</p>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+
+
+</body>
+</html>
