@@ -1,3 +1,14 @@
+🧠 Jak to działa?
+Użytkownik wybiera branżę oraz dział firmy (np. IT, finanse, prawo, marketing), a platforma generuje spersonalizowaną checklistę kluczowych zasad OPSEC, gotową do wdrożenia.
+
+📋 Przykładowe punkty checklisty
+💻 Dział IT:
+Zarządzanie hasłami
+Wdrożenie polityki silnych haseł, menedżer haseł, MFA.
+
+Aktualizacje oprogramowania
+Regularne aktualizacje systemów i aplikacji, automatyczne aktualizacje.
+
 
 working demo https://cyberkurs.online/checklist-OPSEC/
 
